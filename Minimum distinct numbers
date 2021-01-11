@@ -31,6 +31,12 @@ Constraints:
 1 ≤ N ≤ 100000
 1 ≤ Arr[i] ≤ 100000
 1 ≤ K ≤ N
+APPROACH:
+
+1- Count the occurrence of elements and store them in the hash. 
+2- Sort the hash. 
+3- Start removing elements from the hash. 
+4- Return the number of values left in the hash.
 
 SOLUTION:
 
