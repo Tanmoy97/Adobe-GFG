@@ -1,0 +1,76 @@
+Given an array Arr[] of N integers,  and given a number K, the task is to remove K elements such that there should be minimum distinct elements left. Find minimum number of distinct elements left.
+
+ 
+
+Example:
+
+Input:
+N=6
+Arr[]={2, 2, 1, 3, 3, 3}
+K=3
+Output:
+1
+Explanation:
+Since we can remove 3 numbers we remove
+1,2,2 and are left with 3,3,3 ,total no of 
+distinct elements after removal is 1,
+therefore output is 1.
+ 
+
+Your Task:  
+You don't need to read input or print anything. Your task is to complete the function mindistinct() which takes an integer array Arr, its size N , an integer K as input parameters, and returns the minimum number of distinct elements left after removing K elements.
+
+ 
+
+Expected Time Complexity: O(N * LogN)
+Expected Auxiliary Space: O(N)
+
+ 
+
+Constraints:
+1 ≤ N ≤ 100000
+1 ≤ Arr[i] ≤ 100000
+1 ≤ K ≤ N
+
+SOLUTION:
+
+{
+
+public:
+    int mindistinct(int Arr[], int N, int K)
+    {
+	    // code here
+	unordered_map<int, int> m;
+    vector<pair<int, int> > v;
+    int count = 0;
+ 
+    // Store the occurrence of ids
+    for (int i = 0; i < N; i++)
+        m[Arr[i]]++;
+ 
+    // Store into the vector second as first and vice-versa
+    for (auto it = m.begin(); it != m.end(); it++)
+        v.push_back(make_pair(it->second, it->first));
+ 
+    // Sort the vector
+    sort(v.begin(), v.end());
+ 
+    int size = v.size();
+ 
+    // Start removing elements from the beginning
+    for (int i = 0; i < size; i++) {
+ 
+        // Remove if current value is less than 
+        // or equal to mi
+        if (v[i].first <= K) {
+            K -= v[i].first;
+            count++;
+        }
+ 
+        // Return the remaining size
+        else
+            return size - count;
+    }
+    return size - count;
+    }
+};
