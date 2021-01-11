@@ -1,0 +1,48 @@
+
+SOLUTION:
+
+RECURSIVE :
+
+int path(int x,int y, int a, int b)
+{
+if(x>a ||y>b)
+return 0;
+if(x==a && y==b)
+return 1;
+if(x==a)
+return path(x,y+1,a,b);
+if(y==b)
+return path(x+1,y,a,b);
+
+return path(x+1,y,a,b)+path(x,y+1,a,b);
+}
+
+int NumberOfPath(int a, int b) {
+return path(1,1,a,b);
+}
+
+ANOTHER SOLUTION:
+
+int NumberOfPath(int a, int b) {
+    //code here
+    if (a==1 || b==1) return 1;
+return NumberOfPath(a-1,b)+NumberOfPath(a,b-1);
+}
+
+
+ANOTHER DP SOLUTION:
+
+int NumberOfPath(int a, int b) {
+    //code here
+    int dp[b] = {1};
+    dp[0] = 1;
+    
+    for(int i = 0; i < a; i++)
+    {
+        for(int j = 1; j < b; j++)
+        {
+            dp[j] += dp[j - 1];
+        }
+    }
+    return dp[b - 1];
+}
