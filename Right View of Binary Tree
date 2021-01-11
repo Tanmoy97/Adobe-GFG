@@ -1,0 +1,63 @@
+Right view of a Binary Tree is a set of nodes that are visible when tree is viewed from the right side. Given a Binary Tree, find its right view. 
+
+
+Example 1:
+
+Input:
+       1
+    /    \
+   3      2
+Output: 1 2
+
+Example 2:
+
+Input:
+     10
+    /   \
+  20     30
+ /   \
+40  60 
+Output: 10 30 60
+
+Your Task:
+You do not need to read input or print anything. Complete the function rightView() that takes the root node as input parameter and returns a list of integers denoting the right view of the tree.
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(Height of the Tree)
+
+
+Constraints:
+1 <= Number of nodes <= 10^5
+1 <= Data of a node <= 10^5.
+
+SOLUTION:
+
+int mx;
+void pass(Node *root,vector<int>&v,int level)
+{
+if(root==NULL)
+{
+return;
+}
+if(level>mx)
+{
+v.push_back(root->data);
+mx=level;
+}
+pass(root->right,v,level+1);
+pass(root->left,v,level+1);
+
+}
+class Solution{
+public:
+    vector<int> rightView(Node *root)
+    {
+        // Your Code here
+        int level=0;
+        mx=-1;
+        vector<int>v;
+        pass(root,v,level);
+        return v;
+    }
+};
